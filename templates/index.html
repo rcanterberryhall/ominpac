@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniPAC - Open Standard for Citizen-Funded Elections</title>
+    <meta name="description" content="Public domain framework for citizen-funded elections that makes special interest money economically irrelevant">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            background: #fff;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #000;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            color: #000;
+            border-bottom: 2px solid #000;
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: #000;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background: #f4f4f4;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+            border-left: 4px solid #000;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 3px solid #000;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 1rem;
+        }
+        
+        .toc {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin-bottom: 3rem;
+        }
+        
+        .toc h2 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            border: none;
+            padding: 0;
+        }
+        
+        .toc ul {
+            margin-left: 1.5rem;
+        }
+        
+        .toc a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        .note {
+            background: #fffbea;
+            border-left: 4px solid #f0b429;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .important {
+            background: #ffe9e9;
+            border-left: 4px solid #e74c3c;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid #ddd;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+        }
+        
+        a {
+            color: #0066cc;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background: #f4f4f4;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>OmniPAC</h1>
+    <p class="tagline">Open Standard for Citizen-Funded Elections</p>
+    <p class="meta">
+        Version 1.0 | February 2026<br>
+        Status: Public Domain (CC0)<br>
+        Format: Request for Comments
+    </p>
+</div>
+
+<div class="toc">
+    <h2>Table of Contents</h2>
+    <ul>
+        <li><a href="#abstract">Abstract</a></li>
+        <li><a href="#problem">1. The Problem</a></li>
+        <li><a href="#solution">2. The Solution</a></li>
+        <li><a href="#how-it-works">3. How It Works</a></li>
+        <li><a href="#principles">4. Core Principles</a></li>
+        <li><a href="#game-theory">5. Game Theory & Incentives</a></li>
+        <li><a href="#implementation">6. Implementation Guide</a></li>
+        <li><a href="#transparency">7. Transparency Requirements</a></li>
+        <li><a href="#governance">8. Governance</a></li>
+        <li><a href="#legal">9. Legal Considerations</a></li>
+        <li><a href="#faq">10. FAQ</a></li>
+    </ul>
+</div>
+
+<h2 id="abstract">Abstract</h2>
+
+<p><strong>OmniPAC is an open standard for citizen-funded elections where people pool small monthly contributions and distribute them equally to all viable candidates.</strong></p>
+
+<p>By aggregating millions of small donations—for example, 130 million Americans contributing $20/month would generate $31 billion per year—citizens can collectively outspend the roughly $20 billion per cycle that special interests spend buying political influence.</p>
+
+<p>The system works through transparent collection and mechanical distribution: citizens contribute any amount (suggested $10-50/month), funds pool in a non-partisan organization, and when elections approach, the total is divided equally among all candidates who meet objective viability criteria (such as being on the ballot, polling above a threshold, or demonstrating grassroots support). Every candidate receives the same amount regardless of party, ideology, or positions—turning elections into competitions of ideas rather than fundraising capacity.</p>
+
+<p>OmniPAC solves the campaign finance prisoner's dilemma by flipping its incentives. In the current system, both candidates would prefer to refuse corporate money, but each fears being outspent—so both accept corporate funding (Nash equilibrium at a bad outcome). When citizens collectively outspend special interests 3:1 ($31 billion per year vs. $20 billion per cycle), OmniPAC provides equal substantial baseline funding to all candidates, making corporate contributions marginal rather than decisive. A candidate receiving $50 million from special interests has only a 16% funding advantage over their opponent when both have $312 million from citizens—compared to infinite advantage in the current system. The dominant strategy shifts from "must accept corporate money or lose" to "citizen money provides the baseline, corporate money is supplementary." Refusing OmniPAC money becomes irrational, and attacking it while accepting it makes you a hypocrite. The new equilibrium is both candidates funded primarily by citizens, with special interest influence reduced from determinative to marginal.</p>
+
+<h2 id="problem">1. The Problem</h2>
+
+<p>Special interests spend concentrated money to buy political influence. This creates policy capture and breaks democratic responsiveness.</p>
+
+<p><strong>Current state:</strong></p>
+<ul>
+    <li>~$20 billion spent per US election cycle by special interests</li>
+    <li>Politicians spend 40-60% of their time fundraising</li>
+    <li>Policy decided by donors, not voters</li>
+    <li>Candidates trapped in prisoner's dilemma: both would prefer clean funding, but fear being outspent</li>
+</ul>
+
+<h2 id="solution">2. The Solution</h2>
+
+<p>Aggregate distributed citizen money to make special interest money economically irrelevant to candidates.</p>
+
+<p><strong>The math:</strong></p>
+<ul>
+    <li>Special interests spend: ~$20 billion per US election cycle</li>
+    <li>US adults: 260 million</li>
+    <li>Cost to neutralize (at 5X their spending): $385 per person per cycle = $16/month</li>
+    <li>At $20/month × 50% participation: $31 billion per year</li>
+    <li><strong>Result: 3:1 ratio, special interests become economically marginal</strong></li>
+</ul>
+
+<h2 id="how-it-works">3. How It Works</h2>
+
+<h3>Collection Phase</h3>
+<ul>
+    <li>Citizens contribute voluntarily (any amount, suggested $10-50/month)</li>
+    <li>Recurring payments preferred (like Patreon)</li>
+    <li>Funds pool in transparent organization</li>
+    <li>Real-time dashboard shows total raised</li>
+</ul>
+
+<h3>Distribution Phase</h3>
+<ul>
+    <li>Occurs ~10 months before election (e.g., January for November election)</li>
+    <li>Viability criteria assessed (objective, published in advance)</li>
+    <li>Simple formula: <code>Total Raised ÷ Number of Viable Candidates = Amount Each</code></li>
+    <li>Equal distribution to all who qualify</li>
+    <li>Candidates use funds for campaign expenses</li>
+</ul>
+
+<h3>The Napkin Audit</h3>
+<p>Anyone can verify distribution in 30 seconds:</p>
+<pre>
+Total raised:    $47,392,847
+Candidates:      2
+Each receives:   $47,392,847 ÷ 2 = $23,696,423.50
+
+Pull out phone calculator → verify math → done.
+</pre>
+
+<h2 id="principles">4. Core Principles</h2>
+
+<div class="important">
+<h3>Non-Negotiable Requirements</h3>
+<ol>
+    <li><strong>Equal Distribution</strong> - All viable candidates receive identical amounts. No exceptions.</li>
+    <li><strong>Complete Transparency</strong> - All money flows public in real-time. All decisions public.</li>
+    <li><strong>Non-Partisan</strong> - No endorsements, no preferences, no favoritism, ever.</li>
+    <li><strong>Policy-Agnostic</strong> - No positions on any issues. Money in, money out, nothing else.</li>
+    <li><strong>Radical Simplicity</strong> - Distribution must be verifiable on a napkin.</li>
+</ol>
+</div>
+
+<h3>What OmniPAC Says</h3>
+<p><strong>About candidates:</strong> "[Candidate] received $[amount] on [date] because they met our viability criteria: [specific criteria]"</p>
+<p><strong>About policy:</strong> Nothing. Ever.</p>
+<p><strong>About outcomes:</strong> Nothing. Ever.</p>
+<p><strong>Everything else:</strong> Nothing.</p>
+
+<h2 id="game-theory">5. Game Theory & Incentives</h2>
+
+<h3>The Prisoner's Dilemma</h3>
+
+<table>
+    <tr>
+        <th></th>
+        <th>Opponent Accepts OmniPAC</th>
+        <th>Opponent Refuses OmniPAC</th>
+    </tr>
+    <tr>
+        <td><strong>You Accept</strong></td>
+        <td>Both get $67M<br>Competitive race</td>
+        <td>You: $67M<br>Them: $5M corp<br><strong>You win</strong></td>
+    </tr>
+    <tr>
+        <td><strong>You Refuse</strong></td>
+        <td>You: $5M corp<br>Them: $67M<br><strong>You lose</strong></td>
+        <td>Both get $5M corp<br>Back to old system</td>
+    </tr>
+</table>
+
+<p><strong>Nash Equilibrium:</strong> Both accept OmniPAC (dominant strategy)</p>
+
+<h3>Why Politicians Participate</h3>
+<ul>
+    <li>Post once on social media vs. 1,500 hours of fundraising calls</li>
+    <li>$67M from citizens vs. $5M from special interests</li>
+    <li>"I'm citizen-funded" vs. "I'm corporate-funded" messaging</li>
+    <li>Time to govern vs. time begging for money</li>
+    <li><strong>Rational self-interest = participation</strong></li>
+</ul>
+
+<h3>Why Attacking OmniPAC Fails</h3>
+<ul>
+    <li><strong>If you take the money anyway:</strong> Hypocrite</li>
+    <li><strong>If you refuse the money:</strong> Outspent, lose election</li>
+    <li><strong>Either way:</strong> Bad outcome</li>
+    <li><strong>Result:</strong> Attacks are irrational, self-defeating</li>
+</ul>
+
+<h2 id="implementation">6. Implementation Guide</h2>
+
+<h3>This Is a Standard, Not an Organization</h3>
+
+<div class="note">
+<p><strong>Critical:</strong> OmniPAC is an open protocol like Linux or BitTorrent. Anyone can implement it. No permission needed. No central authority exists.</p>
+</div>
+
+<h3>Starting an Implementation</h3>
+
+<p><strong>Step 1: Legal Structure</strong></p>
+<ul>
+    <li>US Federal/State: Super PAC or 501(c)(4)</li>
+    <li>Register with FEC or state election commission</li>
+    <li>Consult local campaign finance law</li>
+</ul>
+
+<p><strong>Step 2: Define Scope</strong></p>
+<ul>
+    <li>Geographic: Nation, state, county, city</li>
+    <li>Temporal: Which election cycles</li>
+    <li>Viability criteria: Clear, objective, published</li>
+</ul>
+
+<p><strong>Step 3: Technical Infrastructure</strong></p>
+<ul>
+    <li>Payment processing (Stripe, etc.)</li>
+    <li>Real-time transparency dashboard</li>
+    <li>Public API for verification</li>
+    <li>Database for tracking</li>
+</ul>
+
+<p><strong>Step 4: Governance</strong></p>
+<ul>
+    <li>Board structure (or other model)</li>
+    <li>Contributor voting (1 person = 1 vote, not weighted by amount)</li>
+    <li>Conflict of interest policies</li>
+    <li>Bylaws codifying equal distribution</li>
+</ul>
+
+<p><strong>Step 5: Launch</strong></p>
+<ul>
+    <li>Website with framework reference</li>
+    <li>Transparency dashboard live</li>
+    <li>Accept first contributions</li>
+    <li>Track special interest spending</li>
+</ul>
+
+<h3>Example Viability Criteria</h3>
+
+<p>Candidates qualify if they meet ANY of:</p>
+<ul>
+    <li>On ballot in general election (automatic)</li>
+    <li>Polling ≥5% in last 90 days</li>
+    <li>Raised ≥$50k from 500+ small donors</li>
+    <li>Collected 1,000+ valid signatures</li>
+</ul>
+
+<p>Criteria must be:</p>
+<ul>
+    <li>Objective (no discretion)</li>
+    <li>Published in advance</li>
+    <li>Applied mechanically</li>
+    <li>Prevents frivolous candidates without excluding genuine challengers</li>
+</ul>
+
+<h2 id="transparency">7. Transparency Requirements</h2>
+
+<h3>Real-Time Dashboard Must Show</h3>
+
+<pre>
+TOTAL RAISED:         $47,392,847
+VIABLE CANDIDATES:    2
+EACH RECEIVES:        $23,696,423.50
+
+Special Interest Spending (This Cycle): $24,700,000
+Citizen : Corporate Ratio: 1.9:1
+Target Ratio: 5:1
+Progress: 38%
+</pre>
+
+<h3>All Transactions Public</h3>
+<ul>
+    <li>Every contribution (subject to legal privacy limits)</li>
+    <li>Every distribution</li>
+    <li>Every administrative expense</li>
+    <li>Real-time updates (no batching)</li>
+    <li>Downloadable CSVs</li>
+</ul>
+
+<h3>Public API Required</h3>
+<p>Endpoints for independent verification:</p>
+<ul>
+    <li><code>/api/total-raised</code></li>
+    <li><code>/api/candidate-count</code></li>
+    <li><code>/api/distribution</code></li>
+    <li><code>/api/special-interest-spending</code></li>
+    <li><code>/api/ratio</code></li>
+</ul>
+
+<h3>Annual Independent Audit</h3>
+<ul>
+    <li>Professional accounting firm</li>
+    <li>Results published publicly</li>
+    <li>Any discrepancies disclosed</li>
+    <li>Corrective actions documented</li>
+</ul>
+
+<h2 id="governance">8. Governance</h2>
+
+<h3>Governance Is Local</h3>
+<p>Each implementation chooses its own governance model. The framework requires transparency and equal distribution, not specific governance structures.</p>
+
+<h3>Example Models</h3>
+<ul>
+    <li><strong>Direct Democracy:</strong> All contributors vote on all decisions</li>
+    <li><strong>Representative Board:</strong> Elected board makes operational decisions</li>
+    <li><strong>Benevolent Dictator:</strong> Founder makes decisions, high transparency required</li>
+    <li><strong>Consensus:</strong> Core team decides by consensus</li>
+</ul>
+
+<h3>Required Regardless of Model</h3>
+<ul>
+    <li>All decisions public</li>
+    <li>All finances public</li>
+    <li>Board elections (if applicable) by contributors (1 person = 1 vote)</li>
+    <li>Conflict of interest policies</li>
+    <li>Term limits recommended</li>
+</ul>
+
+<h3>How Bad Actors Get Exposed</h3>
+<ul>
+    <li>Public data enables anyone to audit</li>
+    <li>Multiple implementations create comparison/competition</li>
+    <li>Ability to fork if one becomes corrupt</li>
+    <li>Reputation systems (community scorecards)</li>
+    <li>If corruption found: contributors leave, fork succeeds, corrupt version dies</li>
+</ul>
+
+<h2 id="legal">9. Legal Considerations</h2>
+
+<h3>Legal Framework (US)</h3>
+<p>OmniPAC operates entirely within the framework established by <em>Citizens United v. FEC</em>:</p>
+<ul>
+    <li>Political spending is protected speech ✓</li>
+    <li>Super PACs can raise unlimited funds ✓</li>
+    <li>Independent expenditures are constitutional ✓</li>
+    <li>Equal distribution to all candidates is viewpoint-neutral ✓</li>
+</ul>
+
+<h3>No New Legislation Required</h3>
+<p>This works under current law. No need to wait for reform.</p>
+
+<h3>Decentralized = Resilient</h3>
+<ul>
+    <li>Can't sue an idea or framework</li>
+    <li>Can sue individual implementations, but others continue</li>
+    <li>Forking protects the movement</li>
+    <li>Legal victory in one jurisdiction doesn't stop others</li>
+</ul>
+
+<h3>Expected Legal Challenges</h3>
+<p><strong>Minimal.</strong> Politicians benefit from OmniPAC and will defend it. Attacking citizen-funded elections creates catastrophic optics for special interests.</p>
+
+<h3>Defense Strategy</h3>
+<ul>
+    <li>Meticulous compliance</li>
+    <li>Budget 5-10% for legal defense</li>
+    <li>Build relationships with public interest law firms</li>
+    <li>Make attacks politically toxic through PR</li>
+    <li>First Amendment should prevail eventually</li>
+</ul>
+
+<h2 id="faq">10. Frequently Asked Questions</h2>
+
+<h3>Won't this help candidates I disagree with?</h3>
+<p>Yes. That's the point. The goal is not to win elections but to remove money as the deciding factor. Democracy works when voters choose based on ideas, not who has more money.</p>
+
+<h3>What if special interests just spend more?</h3>
+<p>They can try, but we have 260 million people. At $20/month we raise $62B per cycle. They'd need to triple their spending to compete. That becomes publicly visible and politically toxic. They can't sustain it.</p>
+
+<h3>How do you prevent corruption?</h3>
+<p>Four ways: (1) Complete transparency—everything public, anyone can audit. (2) Distributed implementation—multiple organizations, compare them. (3) Forkability—if one becomes corrupt, fork it. (4) Radical simplicity—total ÷ candidates = amount each. Fraud is immediately obvious.</p>
+
+<h3>Why equal distribution instead of funding reform candidates?</h3>
+<p>Been tried (Mayday PAC, 2014). Became partisan, made enemies, failed. Equal distribution is politically viable because it helps everyone. No one can claim bias.</p>
+
+<h3>What stops candidates from taking both OmniPAC and corporate money?</h3>
+<p>Nothing legally stops them. But dashboard shows all money sources publicly. Opponent campaigns on "corporate-funded vs. citizen-funded." Voters see the comparison. Over time, independent candidates build larger war chests. Market pressure favors independence.</p>
+
+<h3>Does this work at small scale?</h3>
+<p>Yes. City council race with $100k distributed equally changes dynamics. State legislative race with $1M makes difference. US Senate race with $67M is transformative. Start where you can, scale up.</p>
+
+<h3>Is this legal?</h3>
+<p>In the US, yes. Super PAC structure is constitutional (Citizens United). Independent expenditures are protected. Equal distribution to all candidates is viewpoint-neutral. Other countries: consult local election law.</p>
+
+<h3>Who decides "viable candidate"?</h3>
+<p>Each implementation sets objective criteria (on ballot, polling threshold, fundraising threshold, or signature requirement) and applies mechanically. No discretion. Community can verify criteria are fair.</p>
+
+<h3>Can corporations contribute to OmniPAC?</h3>
+<p>Legally yes. Practically they won't—contributing means funding their opponents equally to their allies. Source doesn't matter if distribution is equal.</p>
+
+<h3>Isn't this just like the GameStop stock situation?</h3>
+<p>Yes! Retail investors used Wall Street's own tools (stock buying, coordination) to beat hedge funds at their own game. OmniPAC uses special interests' own tools (Super PACs, aggregated money) to beat them. Same energy, better outcome, sustainable not just a squeeze.</p>
+
+<div class="footer">
+    <h2>License & Distribution</h2>
+    <p>This framework is released under <strong>Creative Commons Zero (CC0)</strong> — public domain dedication.</p>
+    <p>Use it. Fork it. Improve it. Implement it anywhere.</p>
+    <p>No permission needed. No attribution required.</p>
+    <p>The goal is maximum adoption of citizen-funded democracy.</p>
+    <hr style="margin: 2rem 0;">
+    <p><strong>This is a framework, not an organization.</strong></p>
+    <p>We are not an entity. We do not collect money. We do not endorse candidates.<br>
+    We publish a standard. Anyone can implement it.</p>
+    <p style="margin-top: 2rem;">
+        <a href="https://github.com/omnipac/framework">View on GitHub</a> | 
+        <a href="#top">Back to Top</a>
+    </p>
+    <p style="margin-top: 1rem; font-size: 0.85rem;">
+        Last Updated: February 2026 | Framework Version 1.0
+    </p>
+</div>
+
+</body>
+</html>
