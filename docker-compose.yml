@@ -1,0 +1,8 @@
+services:
+  omnipac:
+    build: .
+    ports:
+      - "127.0.0.1:5001:5001"
+    restart: unless-stopped
+    environment:
+      FLASK_ENV: production
